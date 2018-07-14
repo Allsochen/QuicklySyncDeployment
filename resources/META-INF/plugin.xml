@@ -19,14 +19,14 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationConfigurable instance="com.github.allsochen.Configuration"
+        <applicationConfigurable instance="com.github.allsochen.quicklydeployment.configuration.Configuration"
                                  displayName="Quickly Sync Deployment"/>
     </extensions>
 
     <actions>
         <group id="QuicklyDeployment.QuicklyGenerateDeploymentGroup"
                text="QuicklyGenerateDeploymentGroup">
-            <add-to-group group-id="ToolsMenu" anchor="last" />
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
             <action id="QuicklyDeployment.QuicklyGenerateDeployment"
                     class="com.github.allsochen.quicklydeployment.QuicklyGenerateDeploymentAction"
                     text="Quickly Sync Deployment"/>
