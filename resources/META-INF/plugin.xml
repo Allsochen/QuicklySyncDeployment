@@ -1,0 +1,36 @@
+<idea-plugin>
+    <id>com.github.allsochen.plugin.quicklydeployment</id>
+    <name>QuicklyDeployment</name>
+    <version>1.0</version>
+    <vendor email="gdcex@qq.com" url="http://github.com">Allsochen</vendor>
+
+    <description><![CDATA[
+        <p>
+            A idea plugin tool that provide a quick way to set up deployment.
+        </p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+    ]]>
+    </change-notes>
+
+    <idea-version since-build="143.0"/>
+
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable instance="com.github.allsochen.Configuration"
+                                 displayName="Quickly Sync Deployment"/>
+    </extensions>
+
+    <actions>
+        <group id="QuicklyDeployment.QuicklyGenerateDeploymentGroup"
+               text="QuicklyGenerateDeploymentGroup">
+            <add-to-group group-id="ToolsMenu" anchor="last" />
+            <action id="QuicklyDeployment.QuicklyGenerateDeployment"
+                    class="com.github.allsochen.quicklydeployment.QuicklyGenerateDeploymentAction"
+                    text="Quickly Sync Deployment"/>
+        </group>
+    </actions>
+
+</idea-plugin>
