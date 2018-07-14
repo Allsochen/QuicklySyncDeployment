@@ -16,7 +16,7 @@ public class Configuration implements Configurable {
 
     private ConfigurationModifiedListener listener = new ConfigurationModifiedListener(this);
 
-    public static final String JSON_STR = "json_str";
+    public static final String JSON_STR = Configuration.class.getCanonicalName();
 
     private JTextArea jsonArea;
 
