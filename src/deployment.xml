@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="${projectName}" deleteMissingItems="true" createEmptyFolders="true" traceLevel="DETAILS" promptOnLocalOverwrite="false" exclude=".svn;.cvs;.idea;.DS_Store;.git;.hg;*.hprof;*.pyc;.*;cmake-build-debug;CMakeLists.txt" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" autoUpload="Always" serverName="${projectName}" deleteMissingItems="true" createEmptyFolders="true" traceLevel="DETAILS" promptOnLocalOverwrite="false" exclude=".svn;.cvs;.idea;.DS_Store;.git;.hg;*.hprof;*.pyc;.cproject;.project;cmake-build-debug;CMakeLists.txt" autoUploadExternalChanges="true">
     <serverData>
       <paths name="${projectName}">
         <serverdata>
