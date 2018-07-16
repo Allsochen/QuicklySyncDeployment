@@ -62,7 +62,9 @@ public class Configuration implements Configurable {
 
     @Override
     public void apply() throws ConfigurationException {
-        Properties.set(JSON_STR, jsonArea.getText());
+        String text = jsonArea.getText();
+        text = text.replaceAll("\\\\", "/");
+        Properties.set(JSON_STR, text);
         modified = true;
     }
 

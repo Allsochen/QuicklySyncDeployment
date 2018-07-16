@@ -64,7 +64,7 @@ public class QuicklyGenerateDeploymentAction extends AnAction {
             return;
         }
         Messages.showInfoMessage(project,
-                "project file will synchronize to: " + rootPath + "/" + project.getName(),
+                "project will synchronize to: " + rootPath + "/" + project.getName(),
                 "config success");
     }
 
