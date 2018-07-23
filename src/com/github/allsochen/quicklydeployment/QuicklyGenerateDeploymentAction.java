@@ -8,6 +8,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
+import org.codehaus.plexus.util.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.file.Files;
 
 public class QuicklyGenerateDeploymentAction extends AnAction {
 
@@ -43,11 +45,13 @@ public class QuicklyGenerateDeploymentAction extends AnAction {
             return;
         }
         String rootPath = jsonConfig.getRootPath();
-        rootPath = rootPath.replace("\\", "/");
+        rootPath = rootPath.replace("\\", File.separator);
         if (rootPath.endsWith("/")) {
             rootPath = rootPath.substring(0, rootPath.length() - 1);
         }
         try {
+            File file = new File(rootPath);
+            file.mkdirs();
             handleDeployment(project.getName(), basePath);
         } catch (IOException e) {
             Messages.showInfoMessage(project,
