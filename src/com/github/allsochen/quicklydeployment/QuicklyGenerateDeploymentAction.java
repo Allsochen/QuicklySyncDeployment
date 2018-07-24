@@ -4,10 +4,12 @@ import com.github.allsochen.quicklydeployment.configuration.Configuration;
 import com.github.allsochen.quicklydeployment.configuration.JsonConfig;
 import com.github.allsochen.quicklydeployment.configuration.JsonConfigBuilder;
 import com.github.allsochen.quicklydeployment.configuration.Properties;
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.vfs.LocalFileSystem;
 
 import java.io.*;
 
@@ -61,6 +63,27 @@ public class QuicklyGenerateDeploymentAction extends AnAction {
         Messages.showInfoMessage(project,
                 "project will synchronize to: " + rootPath + "/" + project.getName(),
                 "config success");
+        LocalFileSystem.getInstance().refresh(true);
+        LocalFileSystem.getInstance().refresh(false);
+        AnAction anAction = ActionManager.getInstance().getAction("RemoteServers.EditDeploymentConfig");
+        if (anAction != null) {
+            anAction.update(event);
+            anAction.beforeActionPerformedUpdate(event);
+            anAction.actionPerformed(event);
+        }
+        anAction = ActionManager.getInstance().getAction("Servers.Deploy");
+        if (anAction != null) {
+            anAction.update(event);
+            anAction.beforeActionPerformedUpdate(event);
+            anAction.actionPerformed(event);
+        }
+        anAction = ActionManager.getInstance().getAction("RemoteServers.EditServerConfig");
+        if (anAction != null) {
+            anAction.update(event);
+            anAction.beforeActionPerformedUpdate(event);
+            anAction.actionPerformed(event);
+        }
+        System.out.println(anAction.toString());
     }
 
     private void handleDeployment(String projectName, String basePath)
