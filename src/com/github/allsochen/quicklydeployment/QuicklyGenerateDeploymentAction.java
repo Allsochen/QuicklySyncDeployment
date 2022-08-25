@@ -8,10 +8,13 @@ import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VfsUtil;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class QuicklyGenerateDeploymentAction extends AnAction {
 
@@ -33,7 +36,7 @@ public class QuicklyGenerateDeploymentAction extends AnAction {
         } catch (Exception e) {
             Messages.showInfoMessage(project,
                     "Please config the target deployment root path(e.g. D:/Codes/deployment). "
-                    + "Settings->Quickly Sync Deployment",
+                            + "Settings->Quickly Sync Deployment",
                     "configuration error");
             return;
         }
@@ -63,8 +66,8 @@ public class QuicklyGenerateDeploymentAction extends AnAction {
         Messages.showInfoMessage(project,
                 "project will synchronize to: " + rootPath + "/" + project.getName(),
                 "config success");
+        VfsUtil.markDirtyAndRefresh(true, true, true, ProjectRootManager.getInstance(project).getContentRoots());
         LocalFileSystem.getInstance().refresh(true);
-        LocalFileSystem.getInstance().refresh(false);
         AnAction anAction = ActionManager.getInstance().getAction("RemoteServers.EditDeploymentConfig");
         if (anAction != null) {
             anAction.update(event);
@@ -93,7 +96,7 @@ public class QuicklyGenerateDeploymentAction extends AnAction {
 
         File file = new File(basePath + File.separator + ".idea" + File.separator + "deployment.xml");
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(file), "UTF-8"));
+                new FileOutputStream(file), StandardCharsets.UTF_8));
 
         String line;
         try {
@@ -116,7 +119,7 @@ public class QuicklyGenerateDeploymentAction extends AnAction {
 
         File file = new File(basePath + File.separator + ".idea" + File.separator + "webServers.xml");
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(file), "UTF-8"));
+                new FileOutputStream(file), StandardCharsets.UTF_8));
 
         String line;
         try {

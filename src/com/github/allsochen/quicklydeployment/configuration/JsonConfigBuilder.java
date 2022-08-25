@@ -1,8 +1,11 @@
 package com.github.allsochen.quicklydeployment.configuration;
 
+import com.github.allsochen.quicklydeployment.OsInfo;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.Map;
 
 public class JsonConfigBuilder {
 
@@ -22,7 +25,13 @@ public class JsonConfigBuilder {
 
     public String create() {
         JsonConfig jsonConfig = new JsonConfig();
-        jsonConfig.setRootPath("");
+        Map<String, String> env = System.getenv();
+        String username = env.getOrDefault("USERNAME", env.getOrDefault("USER", "yourname"));
+        if (OsInfo.isWindows()) {
+            jsonConfig.setRootPath("Z:/allsochen/projects/MTT");
+        } else {
+            jsonConfig.setRootPath("/Volumes/dev/" + username + "/projects/MTT");
+        }
         return gson.toJson(jsonConfig);
     }
 
